@@ -2,6 +2,7 @@
 import {Left,Right} from "@bigbinary/neeto-icons";
 import {Button} from "@bigbinary/neetoui";
 import {useState} from 'react';
+import classNames from "classnames";
 const Carousel=({title ,imageUrls})=>{
     const [currentIndex,setCurrentIndex]=useState(0);
     const handleNext=()=>{
@@ -13,6 +14,7 @@ const Carousel=({title ,imageUrls})=>{
         setCurrentIndex(prevoiusIndex);
     }
     return (
+        <div className="flex flex-col items-center gap-2">
         <div className="flex items-center">
         <Button icon={Left}
         className="shrink-0 focus-within:ring-0 hover:bg:transparent"
@@ -26,6 +28,19 @@ const Carousel=({title ,imageUrls})=>{
             style="text"
             onClick={handleNext}
             />
+        </div>
+        <div className="flex space-x-1">
+           { imageUrls.map((_,index) => (
+            
+            <span 
+            key={index}
+            className={classNames("neeto-ui-border-black neeto-ui-rounded-full h-3 w-3 cursor-pointer border",{"neeto-ui-bg-black":index===currentIndex})}
+            onClick={()=>setCurrentIndex(index)}
+            ></span>
+           )
+
+            )}
+        </div>
         </div>
     )
 }
